@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { 
@@ -15,10 +14,12 @@ import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Search, UserPlus, CalendarClock } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { AddPatientDialog } from "./AddPatientDialog";
 
 export function PatientList() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedPatient, setSelectedPatient] = useState<string | null>(null);
+  const [showAddPatient, setShowAddPatient] = useState(false);
   const navigate = useNavigate();
 
   const filteredPatients = patients.filter((patient) =>
@@ -70,7 +71,10 @@ export function PatientList() {
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
               </div>
-              <Button className="whitespace-nowrap">
+              <Button 
+                className="whitespace-nowrap"
+                onClick={() => setShowAddPatient(true)}
+              >
                 <UserPlus className="h-4 w-4 mr-2" />
                 Add Patient
               </Button>
@@ -273,6 +277,11 @@ export function PatientList() {
           </DialogContent>
         )}
       </Dialog>
+
+      <AddPatientDialog
+        open={showAddPatient}
+        onOpenChange={setShowAddPatient}
+      />
     </>
   );
 }
