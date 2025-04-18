@@ -1,16 +1,20 @@
 
 import { useState } from "react";
-import { Bell, Search, MessageCircle } from "lucide-react";
+import { Bell, Search, MessageCircle, User, LogOut, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { activityLogs } from "@/data/mockData";
 import { cn } from "@/lib/utils";
 import { AIInsightBadge } from "@/components/dashboard/AIInsightBadge";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Header() {
   const [searchQuery, setSearchQuery] = useState("");
   const [showNotifications, setShowNotifications] = useState(false);
+  const { user, logout } = useAuth();
 
   const recentLogs = activityLogs.slice(0, 5);
   
@@ -93,7 +97,55 @@ export default function Header() {
         </Popover>
 
         <AIInsightBadge />
+
+        {user && (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="relative rounded-full p-0 hover:bg-transparent">
+                <Avatar>
+                  <AvatarImage 
+                    src={user.avatar || `https://avatar.vercel.sh/${user.id}.png`} 
+                    alt={user.name} 
+                  />
+                  <AvatarFallback>{user.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                </Avatar>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56" align="end">
+              <DropdownMenuLabel>
+                <div className="flex items-center space-x-2">
+                  <Avatar>
+                    <AvatarImage 
+                      src={user.avatar || `https://avatar.vercel.sh/${user.id}.png`} 
+                      alt={user.name} 
+                    />
+                    <AvatarFallback>{user.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <p className="text-sm font-medium">{user.name}</p>
+                    <p className="text-xs text-muted-foreground capitalize">{user.role}</p>
+                  </div>
+                </div>
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <User className="mr-2 h-4 w-4" />
+                <span>Profile</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Settings className="mr-2 h-4 w-4" />
+                <span>Settings</span>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onSelect={() => logout()}>
+                <LogOut className="mr-2 h-4 w-4" />
+                <span>Logout</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
       </div>
     </header>
   );
 }
+
