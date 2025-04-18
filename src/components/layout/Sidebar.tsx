@@ -7,12 +7,14 @@ import {
   Calendar, 
   Stethoscope, 
   FileText, 
-  ActivitySquare, 
+  ActivitySquare,
   Settings, 
   Menu, 
   X, 
   Brain,
-  LogOut
+  LogOut,
+  ListTodo,
+  Package,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/context/AuthContext";
@@ -71,6 +73,21 @@ export default function Sidebar() {
       icon: <Stethoscope size={20} />,
       label: "Departments",
       href: "/departments",
+    },
+    {
+      icon: <ListTodo size={20} />,
+      label: "Tasks",
+      href: "/tasks",
+    },
+    {
+      icon: <Users size={20} />,
+      label: "Staff",
+      href: "/staff",
+    },
+    {
+      icon: <Package size={20} />,
+      label: "Inventory",
+      href: "/inventory",
     },
     {
       icon: <FileText size={20} />,
