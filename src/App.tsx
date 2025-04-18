@@ -12,6 +12,11 @@ import LoginPage from "./pages/LoginPage";
 import Dashboard from "./pages/Dashboard";
 import Patients from "./pages/Patients";
 import Appointments from "./pages/Appointments";
+import Departments from "./pages/Departments";
+import Reports from "./pages/Reports";
+import Analytics from "./pages/Analytics";
+import AIInsights from "./pages/AIInsights";
+import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +33,11 @@ const App = () => (
             <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
             <Route path="/patients" element={<Layout><Patients /></Layout>} />
             <Route path="/appointments" element={<Layout><Appointments /></Layout>} />
+            <Route path="/departments" element={<Layout><Departments /></Layout>} />
+            <Route path="/reports" element={<Layout><Reports /></Layout>} />
+            <Route path="/analytics" element={<Layout><Analytics /></Layout>} />
+            <Route path="/ai-insights" element={<Layout><AIInsights /></Layout>} />
+            <Route path="/settings" element={<Layout><Settings /></Layout>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
