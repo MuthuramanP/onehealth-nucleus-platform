@@ -1,6 +1,6 @@
 
 import { CalendarCheck, CheckCircle2, CircleDashed } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { CreateItemDialog } from "@/components/shared/CreateItemDialog";
 import { CreateTaskForm } from "@/components/tasks/CreateTaskForm";
 
