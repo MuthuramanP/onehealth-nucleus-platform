@@ -25,9 +25,10 @@ interface SidebarItemProps {
   label: string;
   href: string;
   isActive: boolean;
+  collapsed: boolean;
 }
 
-const SidebarItem = ({ icon, label, href, isActive }: SidebarItemProps) => {
+const SidebarItem = ({ icon, label, href, isActive, collapsed }: SidebarItemProps) => {
   return (
     <Link
       to={href}
@@ -35,11 +36,12 @@ const SidebarItem = ({ icon, label, href, isActive }: SidebarItemProps) => {
         "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-all",
         isActive 
           ? "bg-primary text-primary-foreground" 
-          : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+          : "text-muted-foreground hover:bg-secondary hover:text-foreground",
+        collapsed && "justify-center px-2"
       )}
     >
       {icon}
-      <span>{label}</span>
+      {!collapsed && <span>{label}</span>}
     </Link>
   );
 };
@@ -119,13 +121,17 @@ export default function Sidebar() {
       )}
     >
       <div className="flex items-center h-16 px-4 border-b">
-        {!collapsed && (
+        {!collapsed ? (
           <Link to="/dashboard" className="flex items-center gap-2">
             <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center">
               <span className="text-primary-foreground font-bold text-xs">OH</span>
             </div>
             <span className="font-semibold text-xl tracking-tight">OneHealth</span>
           </Link>
+        ) : (
+          <div className="h-8 w-8 mx-auto rounded-full bg-primary flex items-center justify-center">
+            <span className="text-primary-foreground font-bold text-xs">OH</span>
+          </div>
         )}
         <Button
           variant="ghost"
@@ -133,7 +139,7 @@ export default function Sidebar() {
           onClick={toggleSidebar}
           className={cn(
             "h-8 w-8",
-            collapsed ? "mx-auto" : "ml-auto"
+            collapsed ? "absolute right-0 top-4" : "ml-auto"
           )}
         >
           {collapsed ? <Menu size={18} /> : <X size={18} />}
@@ -149,6 +155,7 @@ export default function Sidebar() {
               label={route.label}
               href={route.href}
               isActive={location.pathname === route.href}
+              collapsed={collapsed}
             />
           ))}
         </nav>
@@ -189,7 +196,7 @@ export default function Sidebar() {
               size="icon"
               onClick={logout}
               title="Logout"
-              className="h-8 w-8"
+              className={cn("h-8 w-8", collapsed && "hidden")}
             >
               <LogOut size={18} />
             </Button>
