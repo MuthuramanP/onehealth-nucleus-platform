@@ -2,6 +2,8 @@
 import { Package2, AlertTriangle } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { CreateItemDialog } from "@/components/shared/CreateItemDialog";
+import { CreateInventoryItemForm } from "@/components/inventory/CreateInventoryItemForm";
 
 const Inventory = () => {
   const inventory = [
@@ -14,6 +16,12 @@ const Inventory = () => {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h2 className="text-3xl font-bold tracking-tight">Medical Inventory</h2>
+        <CreateItemDialog
+          title="Inventory Item"
+          description="Add a new item to the inventory."
+        >
+          <CreateInventoryItemForm />
+        </CreateItemDialog>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -45,6 +53,6 @@ const Inventory = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Inventory;

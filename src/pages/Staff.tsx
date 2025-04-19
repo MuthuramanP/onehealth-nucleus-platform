@@ -1,6 +1,8 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { CreateItemDialog } from "@/components/shared/CreateItemDialog";
+import { CreateStaffForm } from "@/components/staff/CreateStaffForm";
 
 const Staff = () => {
   const staffMembers = [
@@ -13,6 +15,12 @@ const Staff = () => {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h2 className="text-3xl font-bold tracking-tight">Staff Directory</h2>
+        <CreateItemDialog
+          title="Staff Member"
+          description="Add a new staff member to the system."
+        >
+          <CreateStaffForm />
+        </CreateItemDialog>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">

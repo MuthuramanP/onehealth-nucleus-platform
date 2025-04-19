@@ -1,6 +1,8 @@
 
 import { CalendarCheck, CheckCircle2, CircleDashed } from "lucide-react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CreateItemDialog } from "@/components/shared/CreateItemDialog";
+import { CreateTaskForm } from "@/components/tasks/CreateTaskForm";
 
 const Tasks = () => {
   const tasks = [
@@ -13,6 +15,12 @@ const Tasks = () => {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h2 className="text-3xl font-bold tracking-tight">Tasks</h2>
+        <CreateItemDialog
+          title="Task"
+          description="Create a new task and assign it to a team member."
+        >
+          <CreateTaskForm />
+        </CreateItemDialog>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
